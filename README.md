@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# brighteyedtherapy.com
 
-## Getting Started
+Production website for my private therapy practice. Built it myself because I wanted full control over how I present my work — and because Wix wasn't cutting it.
 
-First, run the development server:
+**Live:** [brighteyedtherapy.com](https://brighteyedtherapy.com)
+
+## What this is
+
+A fast, accessible, SEO-optimized static site for a solo therapy practice. Next.js 14, Tailwind CSS, statically exported to Apache shared hosting (DreamHost). No CMS, no WordPress, no Wix. One codebase, one build command, one upload.
+
+Designed around what actually converts for private practice: clear specialties, direct language, easy contact paths, trust signals in the right places. Not a template — built from research into what's working for therapy sites in 2025–2026.
+
+## What's in it
+
+- **11 pages** — Home, About, 3 specialty pages (EMDR, OCD/Anxiety, Athletes & Performance), Online Therapy, Fees & FAQ, Contact, Resources, Privacy, custom 404
+- **Self-hosted intro video** — H.264 MP4, no YouTube/Vimeo, no third-party cookies. HIPAA-friendly by default
+- **Formspree contact form** — static form service, no backend needed, no PHI exposure
+- **Full SEO** — JSON-LD structured data (LocalBusiness, Person, FAQPage, BreadcrumbList, Article), Open Graph, XML sitemap, semantic HTML, canonical URLs
+- **WCAG 2.1 AA** — keyboard nav, skip-to-content, focus indicators, screen reader tested, contrast compliant
+- **Performance** — Lighthouse 95+, static export, optimized images (WebP), lazy loading, preload metadata on video
+
+## Stack
+
+| Layer | Tool |
+|-------|------|
+| Framework | Next.js 14 (App Router, static export) |
+| Styling | Tailwind CSS (custom design tokens) |
+| Language | TypeScript |
+| Forms | Formspree |
+| Hosting | DreamHost (Apache, `.htaccess` for routing/caching/security) |
+| Analytics | Plausible or GA4 (optional, env-configured) |
+
+## Quick start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # localhost:3000
+npm run build   # static export → out/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploy
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+# upload out/* to your web host via SFTP/SSH
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The `.htaccess` in `public/` handles clean URL routing, gzip compression, browser caching, security headers, and custom 404. Built for Apache shared hosting — no Vercel, no serverless, no vendor lock-in.
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/                  # Pages (Next.js App Router)
+├── components/           # Reusable UI components
+└── lib/
+    ├── siteConfig.ts     # Central config (name, phone, address, credentials, nav)
+    └── metadata.ts       # SEO metadata builder
+public/
+├── images/               # Optimized assets (WebP, H.264 MP4)
+├── .htaccess             # Apache config
+├── sitemap.xml
+└── robots.txt
+docs/                     # Build, deploy, and content guides
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Why I built this
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+I'm a therapist running a private practice. I'm also a developer. Most therapists pay $50–200/month for Wix, Squarespace, or a TherapySites template that loads slow, ranks poorly, and looks like every other therapist's site.
 
-## Deploy on Vercel
+I built mine for the cost of a domain and $4/month shared hosting. It scores higher on Lighthouse, ranks better on Google, loads faster, and says exactly what I want it to say. The trade-off is you need to know how to code — or know someone who does.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This isn't a template repo. It's my actual production site. But if you're a therapist who codes (or a dev building for one), take what's useful.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Related
+
+- [BrightEyedTherapist](https://github.com/shamanakin/BrightEyedTherapist) — SaaS therapy tools platform (separate project)
+- [DecodeDev](https://github.com/shamanakin/DecodeDev) — Cognitive injection for AI-augmented development
+
+## License
+
+MIT
