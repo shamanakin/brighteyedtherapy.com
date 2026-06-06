@@ -30,24 +30,32 @@ const breadcrumbSchema = {
 
 const articleSchema = {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "BlogPosting",
   headline: "What Does EMDR Actually Feel Like?",
   description:
-    "A therapist's honest explanation of what EMDR processing feels like from the client's perspective.",
+    "A therapist's honest explanation of what EMDR processing feels like from the client's perspective — the real experience, not the clinical description.",
+  image: `${siteConfig.url}/images/og-image.jpg`,
+  datePublished: "2026-03-09T00:00:00-08:00",
+  dateModified: "2026-03-09T00:00:00-08:00",
   author: {
     "@type": "Person",
     name: siteConfig.credentials.name,
     jobTitle: siteConfig.credentials.title,
-    url: siteConfig.url,
+    url: `${siteConfig.url}/about/`,
   },
   publisher: {
     "@type": "Organization",
     name: siteConfig.name,
     url: siteConfig.url,
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteConfig.url}/images/og-image.jpg`,
+    },
   },
-  datePublished: "2026-03-09",
-  dateModified: "2026-03-09",
-  mainEntityOfPage: `${siteConfig.url}/resources/what-does-emdr-feel-like`,
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": `${siteConfig.url}/resources/what-does-emdr-feel-like/`,
+  },
 };
 
 export default function EmdrFeelLikeArticle() {
@@ -108,9 +116,20 @@ export default function EmdrFeelLikeArticle() {
               During processing
             </SectionHeading>
             <p>
-              You hold the target lightly in mind while following bilateral stimulation — typically
-              my fingers moving back and forth, or tapping on your hands. A set lasts about 30
-              seconds. Between sets, I ask a simple question: &quot;What do you notice?&quot;
+              You hold the target lightly in mind while following bilateral stimulation. In-person,
+              you follow a lightbar with your eyes while holding tappers that pulse alternately in
+              each hand. Online, I use a BLS app I built (
+              <a
+                href="https://brighteyedtherapist.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent-hover underline decoration-accent/30 hover:decoration-accent/80 underline-offset-2"
+              >
+                Bright Eyed Therapist
+              </a>
+              ) that runs in your browser — visual stimulation through your screen, with optional
+              audio if you prefer. A set lasts about 30 seconds. Between sets, I ask a simple
+              question: &quot;What do you notice?&quot;
             </p>
             <p>
               What happens next is the part that surprises people. Your brain starts making
@@ -160,8 +179,14 @@ export default function EmdrFeelLikeArticle() {
 
             <div className="border-t border-border pt-10 mt-12">
               <p className="text-text-primary font-medium">
-                If you&apos;re considering EMDR and want to know whether it&apos;s a fit for
-                what you&apos;re dealing with, I offer free 15-minute consultations.
+                If you&apos;re considering{" "}
+                <Link
+                  href="/emdr-therapy-roseville"
+                  className="text-accent hover:text-accent-hover underline decoration-accent/30 hover:decoration-accent/80 underline-offset-2"
+                >
+                  EMDR
+                </Link>{" "}
+                and want to know whether it&apos;s a fit for what you&apos;re dealing with, I offer free 15-minute consultations.
               </p>
               <div className="mt-6">
                 <CTAButton href="/contact" label="Book a Free Consultation" />

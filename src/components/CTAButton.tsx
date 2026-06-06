@@ -16,6 +16,9 @@ const variantClasses = {
     "border border-accent text-accent hover:bg-accent hover:text-white",
 };
 
+const CONSULT_LABEL = "Book a Free Consultation";
+const CONSULT_MICROCOPY = "15-minute call. I'll respond within one business day.";
+
 export default function CTAButton({
   href,
   label,
@@ -24,17 +27,24 @@ export default function CTAButton({
 }: CTAButtonProps) {
   const classes = `${baseClasses} ${variantClasses[variant]}`;
 
-  if (external) {
-    return (
-      <a href={href} className={classes} target="_blank" rel="noopener noreferrer">
-        {label}
-      </a>
-    );
-  }
-
-  return (
+  const button = external ? (
+    <a href={href} className={classes} target="_blank" rel="noopener noreferrer">
+      {label}
+    </a>
+  ) : (
     <Link href={href} className={classes}>
       {label}
     </Link>
   );
+
+  if (label === CONSULT_LABEL) {
+    return (
+      <div className="inline-flex flex-col items-start gap-2">
+        {button}
+        <p className="text-caption text-text-tertiary">{CONSULT_MICROCOPY}</p>
+      </div>
+    );
+  }
+
+  return button;
 }

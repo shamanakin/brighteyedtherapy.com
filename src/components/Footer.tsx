@@ -10,10 +10,10 @@ export default function Footer() {
           {/* Left: info */}
           <div className="space-y-4">
             <p className="font-serif text-h3 text-bg">{siteConfig.name}</p>
-            <p className="text-small text-text-tertiary leading-relaxed">
+            <p className="text-small text-text-on-dark-muted leading-relaxed">
               {siteConfig.description}
             </p>
-            <div className="space-y-1 text-small text-text-tertiary">
+            <div className="space-y-1 text-small text-text-on-dark-muted">
               <p>{siteConfig.address.full}</p>
               <a
                 href={siteConfig.phoneHref}
@@ -36,20 +36,20 @@ export default function Footer() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-small text-text-tertiary hover:text-bg transition-colors"
+                className="text-small text-text-on-dark-muted hover:text-bg transition-colors"
               >
                 {item.label}
               </Link>
             ))}
             <Link
               href="/online-therapy-california"
-              className="text-small text-text-tertiary hover:text-bg transition-colors"
+              className="text-small text-text-on-dark-muted hover:text-bg transition-colors"
             >
               Online Therapy
             </Link>
             <Link
               href="/resources"
-              className="text-small text-text-tertiary hover:text-bg transition-colors"
+              className="text-small text-text-on-dark-muted hover:text-bg transition-colors"
             >
               Resources
             </Link>
@@ -58,16 +58,16 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/10 mt-12 pt-6 space-y-1">
-          <p className="text-caption text-text-tertiary">
+          <p className="text-caption text-text-on-dark-muted">
             {siteConfig.credentials.name}, {siteConfig.credentials.license} | Supervised by{" "}
             {siteConfig.credentials.supervisor}
           </p>
-          <p className="text-caption text-text-tertiary">
+          <p className="text-caption text-text-on-dark-muted">
             Registered Associate Marriage and Family Therapist in Roseville, CA
           </p>
           <Link
             href="/privacy"
-            className="inline-block text-caption text-text-tertiary hover:text-bg transition-colors mt-2"
+            className="inline-block text-caption text-text-on-dark-muted hover:text-bg transition-colors mt-2"
           >
             Privacy Policy
           </Link>

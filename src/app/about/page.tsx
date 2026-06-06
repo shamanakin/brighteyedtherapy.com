@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import CTAButton from "@/components/CTAButton";
 import SectionHeading from "@/components/SectionHeading";
 
@@ -74,7 +75,10 @@ export default function AboutPage() {
               I didn&apos;t choose this work because I always wanted to help people. I chose it because I got obsessed with understanding why humans get stuck — and what actually moves them. Not the stories we tell ourselves, but the encoded material underneath: the nervous system responses, the attachment patterns, the things that keep firing long after the original event is over. I realized that what helped me rebuild wasn&apos;t insight alone. It was processing what my body was still holding. That&apos;s what led me to EMDR, and it&apos;s what shapes every session I run.
             </p>
             <p>
-              I&apos;m neurodivergent, which means my brain is wired for pattern recognition in a way that most people&apos;s aren&apos;t. I notice things — connections between what you&apos;re saying and what your body is doing, themes you haven&apos;t named yet, the gap between what you know and what you feel. I&apos;m also direct. I won&apos;t nod silently for 45 minutes. If I see something, I&apos;ll name it. That style isn&apos;t for everyone, but for the people who want honesty over comfort, it changes the pace of the work.
+              I notice patterns most people miss — the connection between what you&apos;re saying and what your body&apos;s doing, the theme you haven&apos;t named yet, the gap between what you know and what you feel. I&apos;m also direct. I won&apos;t nod silently for 45 minutes. If I see something, I&apos;ll name it. That style isn&apos;t for everyone. For the people who want honesty over comfort, it changes the pace of the work.
+            </p>
+            <p>
+              This approach lands especially well with neurodivergent clients, systems thinkers, and engineers — the pattern-recognition focus tends to match how their minds already work — but you don&apos;t need to identify with any of those to benefit from it.
             </p>
             <p>
               Outside of session, I build software. I designed and coded a full therapy toolkit from scratch — not because I had to, but because I think differently about systems, about what clinicians actually need, about how things should work versus how they&apos;re usually built. That same mind is the one sitting across from you in session.
@@ -94,10 +98,24 @@ export default function AboutPage() {
               </SectionHeading>
               <div className="space-y-5 text-body md:text-body-lg text-text-secondary">
                 <p>
-                  Most people think trauma therapy means talking about hard things until they hurt less. It doesn&apos;t work that way. The material that drives anxiety, reactivity, and relational patterns isn&apos;t stored in the part of your brain that processes language — it&apos;s encoded in your nervous system. EMDR works because it accesses that material directly, through bilateral stimulation, and allows your brain to reprocess it the way it was supposed to in the first place. That&apos;s why people often get further in a few months of EMDR than in years of talk therapy.
+                  Most people think trauma therapy means talking about hard things until they hurt less. It doesn&apos;t work that way. The material that drives anxiety, reactivity, and relational patterns isn&apos;t stored in the part of your brain that processes language — it&apos;s encoded in your nervous system.{" "}
+                  <Link
+                    href="/emdr-therapy-roseville"
+                    className="text-accent hover:text-accent-hover underline decoration-accent/30 hover:decoration-accent/80 underline-offset-2"
+                  >
+                    EMDR
+                  </Link>{" "}
+                  works because it accesses that material directly, through bilateral stimulation, and allows your brain to reprocess it the way it was supposed to in the first place. That&apos;s why people often get further in a few months of EMDR than in years of talk therapy.
                 </p>
                 <p>
-                  I think of most symptoms — the anxiety, the avoidance, the overthinking, the emotional flooding — as signals, not problems. They&apos;re pointing to something encoded underneath that hasn&apos;t been processed. Managing the signals is useful short-term. But if you want durable change, you have to go to the source. That&apos;s the difference between coping and actually resolving something.
+                  I think of most symptoms — the{" "}
+                  <Link
+                    href="/ocd-anxiety-therapy-roseville"
+                    className="text-accent hover:text-accent-hover underline decoration-accent/30 hover:decoration-accent/80 underline-offset-2"
+                  >
+                    anxiety
+                  </Link>
+                  , the avoidance, the overthinking, the emotional flooding — as signals, not problems. They&apos;re pointing to something encoded underneath that hasn&apos;t been processed. Managing the signals is useful short-term. But if you want durable change, you have to go to the source. That&apos;s the difference between coping and actually resolving something.
                 </p>
                 <p>
                   Sessions with me are focused and direct. I don&apos;t do a lot of open-ended &quot;how does that make you feel.&quot; We identify what&apos;s driving the pattern, we target it, we process it. I pay close attention to what&apos;s happening in your body — not just what you&apos;re saying — because that&apos;s usually where the real information is. Between sessions, most clients notice shifts they didn&apos;t expect: a reaction that doesn&apos;t fire the way it used to, a situation that suddenly feels manageable, a thought that loses its charge.
@@ -112,7 +130,7 @@ export default function AboutPage() {
                   alt="Matthew Heake, Registered AMFT"
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 320px"
+                  sizes="(max-width: 768px) 400px, 320px"
                 />
               </div>
               <div className="rounded-lg overflow-hidden aspect-[4/3] relative bg-surface border border-border">
@@ -142,6 +160,9 @@ export default function AboutPage() {
               </li>
             ))}
           </ul>
+          <p className="text-body text-text-secondary mt-6">
+            A Registered Associate Marriage and Family Therapist (AMFT) has completed a master&apos;s degree in counseling psychology and is gaining the supervised clinical hours required for full licensure as a Licensed Marriage and Family Therapist (LMFT) in California. All my work is supervised by Sharon Skelton, LMFT.
+          </p>
           <div className="mt-12">
             <CTAButton href="/contact" label="Book a Free Consultation" />
           </div>

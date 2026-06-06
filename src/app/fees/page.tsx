@@ -38,6 +38,11 @@ const faqItems = [
       "Honest answer: it depends on the complexity and how many targets we're working with. For a single-incident trauma, many clients see significant shifts within 6-12 sessions. For complex trauma or long-standing OCD patterns, it's typically longer — 6 months to a year of weekly work. I won't keep you in therapy longer than necessary, and I'll be transparent about where we are in the process.",
   },
   {
+    question: "Why aren't there any testimonials on this site?",
+    answer:
+      "Therapy isn't a five-star review kind of service. The work people do in session is private, and the changes that matter most are usually internal — hard to describe, easy to flatten into a quote. I'd rather you decide based on whether what's written here matches how you think, and whether the consultation feels right, than on whether some stranger said nice things about me.",
+  },
+  {
     question: "What if I'm not ready for trauma processing?",
     answer:
       "Then we don't start there. Readiness isn't a prerequisite you show up with — it's something we build together. The first phase of EMDR is stabilization: developing the internal resources and coping capacity that make processing safe. If you're nervous about the idea of going into difficult material, that's normal and it's something we'll address directly before we begin.",
@@ -128,6 +133,32 @@ export default function FeesPage() {
             </p>
             <p>
               Payment is due by end of day on the day of your appointment. I accept credit card, debit card, and HSA/FSA cards.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Good Faith Estimate */}
+      <section className="bg-bg py-20 md:py-28 border-t border-border">
+        <div className="max-w-reading mx-auto px-6">
+          <SectionHeading as="h2" className="mb-6">
+            Good Faith Estimate
+          </SectionHeading>
+          <div className="space-y-5 text-body md:text-body-lg text-text-secondary">
+            <p>
+              Under the federal No Surprises Act, you have the right to a Good Faith Estimate explaining how much your mental health care will cost. As an out-of-network provider, I provide every client with a written estimate of expected charges before your first appointment. The estimate covers the cost per session and the anticipated length of treatment based on what we discuss in your consultation.
+            </p>
+            <p>
+              If you receive a bill that&apos;s at least $400 more than your Good Faith Estimate, you have the right to dispute it. For questions or more information, visit{" "}
+              <a
+                href="https://www.cms.gov/nosurprises"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent-hover underline decoration-accent/30 hover:decoration-accent/80 underline-offset-2"
+              >
+                www.cms.gov/nosurprises
+              </a>
+              .
             </p>
           </div>
         </div>

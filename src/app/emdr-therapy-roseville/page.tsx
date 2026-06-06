@@ -22,7 +22,7 @@ const breadcrumbSchema = {
   ],
 };
 
-const sessionWalkthrough = [
+const sessionWalkthrough: { heading: string; placeholder: React.ReactNode }[] = [
   {
     heading: "Your first session",
     placeholder:
@@ -30,8 +30,26 @@ const sessionWalkthrough = [
   },
   {
     heading: "A few sessions in",
-    placeholder:
-      "Once we've identified a target, the processing sessions begin. You'll hold the memory or experience lightly in mind while following bilateral stimulation — usually eye movements or tapping. Between each set, I'll check in briefly: what came up, what shifted, what you noticed. The processing often moves quickly. Between sessions, many clients notice things changing in daily life — a reaction that doesn't fire the way it used to, a situation that feels less charged, a thought that used to spiral but now just passes through.",
+    placeholder: (
+      <>
+        Once we&apos;ve identified a target, the processing sessions begin. You&apos;ll hold the
+        memory or experience lightly in mind while following bilateral stimulation — a lightbar
+        with handheld tappers in-person, or a BLS app I built (
+        <a
+          href="https://brighteyedtherapist.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-accent hover:text-accent-hover underline decoration-accent/30 hover:decoration-accent/80 underline-offset-2"
+        >
+          Bright Eyed Therapist
+        </a>
+        ) that runs in your browser for online sessions. Between each set, I&apos;ll check in
+        briefly: what came up, what shifted, what you noticed. The processing often moves
+        quickly. Between sessions, many clients notice things changing in daily life — a reaction
+        that doesn&apos;t fire the way it used to, a situation that feels less charged, a thought
+        that used to spiral but now just passes through.
+      </>
+    ),
   },
   {
     heading: "What processing feels like",
@@ -85,7 +103,7 @@ export default function EmdrPage() {
           </SectionHeading>
           <div className="space-y-5 text-body md:text-body-lg text-text-secondary">
             <p>
-              EMDR stands for Eye Movement Desensitization and Reprocessing, which is a terrible name for something that actually works elegantly. Here&apos;s the short version: your brain has a natural system for processing difficult experiences, but sometimes that system gets overwhelmed and the experience gets stored &quot;raw&quot; — unprocessed, still carrying its original emotional and physical charge. EMDR uses bilateral stimulation (usually eye movements or tapping) to reactivate that stalled processing system so your brain can finally file the experience the way it was supposed to.
+              EMDR stands for Eye Movement Desensitization and Reprocessing, which is a terrible name for something that actually works elegantly. Here&apos;s the short version: your brain has a natural system for processing difficult experiences, but sometimes that system gets overwhelmed and the experience gets stored &quot;raw&quot; — unprocessed, still carrying its original emotional and physical charge. EMDR uses bilateral stimulation — a lightbar with handheld tappers in-person, or a browser-based BLS app for online sessions — to reactivate that stalled processing system so your brain can finally file the experience the way it was supposed to.
             </p>
             <p>
               Most people imagine EMDR is hypnosis, or that they&apos;ll have to relive their worst moments in vivid detail. Neither is true. You stay fully conscious and in control the entire time. You do connect with the target memory or experience, but briefly — the bilateral stimulation moves you through it rather than keeping you in it. It can feel strange at first, especially because the processing that happens between sets often surprises people. Connections surface that you didn&apos;t expect. The emotional charge shifts mid-session in ways that talking about it for months might not produce.

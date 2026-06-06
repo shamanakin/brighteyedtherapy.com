@@ -129,7 +129,7 @@ export default function HomePage() {
             </div>
             <div className="rounded-lg overflow-hidden aspect-[4/5] w-full max-w-[260px] mx-auto md:max-w-none relative bg-surface border border-border">
               <Image
-                src="/images/headshot.webp"
+                src="/images/headshot-hero.webp"
                 alt="Matthew Heake, therapist in Roseville, CA"
                 fill
                 className="object-cover"

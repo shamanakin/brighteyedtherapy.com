@@ -49,6 +49,10 @@ export default function ContactForm() {
       onSubmit={handleSubmit}
       className="space-y-5"
     >
+      <p className="text-caption text-text-tertiary">
+        No clinical information needed — this form is for scheduling and general questions only.
+      </p>
+
       <div>
         <label htmlFor="contact-name" className="block text-caption text-text-tertiary uppercase tracking-wide mb-1.5">
           Name
@@ -107,10 +111,6 @@ export default function ContactForm() {
           </a>
         </p>
       )}
-
-      <p className="text-caption text-text-tertiary">
-        No clinical information needed. This form is for scheduling and general questions only.
-      </p>
     </form>
   );
 }

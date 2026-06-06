@@ -12,7 +12,7 @@ export function buildMetadata({ title, description, path = "" }: PageMetaInput):
   const fullTitle = `${title} | ${siteConfig.name}`;
 
   return {
-    title: fullTitle,
+    title: { absolute: fullTitle },
     description,
     metadataBase: new URL(siteConfig.url),
     alternates: {

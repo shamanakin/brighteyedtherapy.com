@@ -81,6 +81,13 @@ export default function PrivacyPage() {
               Third-Party Services
             </SectionHeading>
             <p>
+              The contact form on this site is processed by Formspree, a third-party form
+              service. When you submit the form, your name, contact information, and message
+              are sent to Formspree and forwarded to us by email. Formspree operates under
+              its own privacy policy. Do not include clinical or health information in the
+              form — it is intended for scheduling and general questions only.
+            </p>
+            <p className="mt-4">
               This site embeds a Google Maps widget to display the office location. Google
               Maps operates under Google&apos;s own privacy policy. We recommend reviewing that
               policy if you interact with the embedded map.

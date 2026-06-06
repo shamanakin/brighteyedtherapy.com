@@ -96,7 +96,16 @@ export default function AthletesPerformancePage() {
               Athletic performance is fundamentally subcortical — you don&apos;t think your way through a swing or a sprint. Your body runs the program. When that program has encoded interference from an unprocessed experience, no amount of cognitive technique can override it at the speed performance demands. EMDR works at the level where the interference actually lives. It doesn&apos;t teach you to think differently about the block. It resolves the stored material that&apos;s creating it.
             </p>
             <p>
-              Research backs this up directly. NCAA Division I athletes who received EMDR showed decreased anxiety and mood disturbance, and hit personal records in 11 of 17 performance areas. Single-session EMDR has been shown to reduce injury-related anxiety and restore self-confidence. These aren&apos;t marginal gains — they&apos;re the removal of encoded drag that was degrading performance from underneath.
+              Pilot research on injured NCAA Division I athletes who received EMDR found decreased anxiety and mood disturbance, and the athletes hit personal records in 11 of 17 measured performance areas (
+              <a
+                href="https://thesportjournal.org/article/pilot-study-of-the-efficacy-of-eye-movement-desensitization-and-reprocessing-emdr-intervention-for-injured-division-i-student-athletes/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent-hover underline decoration-accent/30 hover:decoration-accent/80 underline-offset-2"
+              >
+                pilot study, The Sport Journal
+              </a>
+              ). The sample was small, but the direction of effect is consistent with what I see in practice: when the encoded interference resolves, performance returns.
             </p>
           </div>
         </div>

@@ -52,14 +52,21 @@ export default function OnlineTherapyPage() {
               Online therapy isn&apos;t a lesser version of in-person work. For most
               clients, the depth and effectiveness are identical — what matters is the
               therapeutic relationship and the modality, not whether we&apos;re in the same
-              room. I use a HIPAA-compliant video platform that&apos;s encrypted end-to-end,
-              and sessions run exactly the same as they would in person.
+              room. Sessions run through TherapyNotes&apos; built-in telehealth platform, which is HIPAA-compliant and encrypted end-to-end. Sessions run exactly the same as they would in person.
             </p>
             <p>
-              EMDR works effectively over video. Instead of following my fingers, you&apos;ll
-              follow a light bar on your screen or use bilateral tapping (hands on knees,
-              alternating). Most clients find the adaptation seamless after the first session.
-              The processing is the same — the bilateral stimulation accesses the same neural
+              EMDR works effectively over video. For online sessions, I use a BLS app I built (
+              <a
+                href="https://brighteyedtherapist.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent-hover underline decoration-accent/30 hover:decoration-accent/80 underline-offset-2"
+              >
+                Bright Eyed Therapist
+              </a>
+              ) that runs directly in your browser — visual stimulation through your screen, with
+              optional audio if you prefer. No app installation, no extra accounts. The processing
+              is the same as in-person — the bilateral stimulation accesses the same neural
               pathways regardless of delivery method.
             </p>
             <p>
@@ -86,9 +93,10 @@ export default function OnlineTherapyPage() {
               comfort and privacy of your own space.
             </p>
             <p>
-              I&apos;m licensed to practice across all of California. Whether you&apos;re in
-              the Bay Area, Los Angeles, San Diego, or a rural area without many local
-              options — if you&apos;re in California, we can work together.
+              I&apos;m a registered associate marriage and family therapist in California,
+              supervised by Sharon Skelton, LMFT — and I see clients throughout the state.
+              Whether you&apos;re in the Bay Area, Los Angeles, San Diego, or a rural area
+              without many local options, if you&apos;re in California, we can work together.
             </p>
           </div>
         </div>
