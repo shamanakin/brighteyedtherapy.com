@@ -1,43 +1,30 @@
 # Bright Eyed Therapy — macOS Deployment Guide
 
-Deploy the static Next.js export to DreamHost via SCP.
+Deploy the static Next.js export to a shared host (e.g. DreamHost) via SCP.
 
-## BEFORE FIRST DEPLOY: DreamHost Domain Setup Required
+All host-specific values are read from environment variables so no credentials
+live in this file. Set them once per shell session (or in `~/.zshrc`):
 
-The domain `brighteyedtherapy.com` is currently on Wix. Before you can deploy to DreamHost, complete these steps:
+```bash
+export BET_DEPLOY_HOST="your-host.example.com"   # SSH/SCP host
+export BET_DEPLOY_USER="your-ssh-user"           # SSH user
+export BET_DEPLOY_PASSWORD="••••••••"            # from your password manager
+export BET_DEPLOY_PATH="~/brighteyedtherapy.com/" # remote site root
+```
 
-1. **Add the domain in DreamHost Panel**
-   - Log into panel.dreamhost.com
-   - Go to Websites → Add a Website
-   - Add `brighteyedtherapy.com` — choose "Fully Hosted"
-   - This creates `~/brighteyedtherapy.com/` on the server
+## BEFORE FIRST DEPLOY: Host Setup
 
-2. **Transfer the domain or update DNS**
-   - Option A (recommended): Transfer the domain registration to DreamHost (Domains → Transfer Registration)
-   - Option B: Keep domain at current registrar, change nameservers to DreamHost nameservers (ns1.dreamhost.com / ns2.dreamhost.com / ns3.dreamhost.com)
-   - DNS propagation takes 24-48 hours
-
-3. **Enable HTTPS**
-   - Once domain resolves, enable Let's Encrypt SSL in DreamHost Panel → Secure Certificates
-
-4. **Then deploy** using the steps below
-
-The DreamHost SSH host for the `shamanakin` account is `pdx1-shared-a3-02.dreamhost.com`.
-
-## Server Details
-
-| Item | Value |
-|------|-------|
-| **SSH/SCP host** | `pdx1-shared-a3-02.dreamhost.com` |
-| **SSH user** | `shamanakin` |
-| **Remote site root** | `~/brighteyedtherapy.com/` |
-
-Credentials: `adminvault/vault/CREDENTIALS.md` — password: vault entry for `brighteyedtherapy.com`.
+1. **Add the domain in your host's panel** and choose "Fully Hosted" so the
+   server creates the remote site root.
+2. **Point DNS at the host** — either transfer the registration or update the
+   nameservers at your current registrar. Allow 24–48h for propagation.
+3. **Enable HTTPS** (Let's Encrypt) once the domain resolves.
 
 ## Prerequisites
 
 - `ssh`, `scp`, `expect` available in Terminal (all standard on macOS)
-- `npm run build` completed successfully (veriy `out/` directory exists)
+- `npm run build` completed successfully (verify `out/` directory exists)
+- The `BET_DEPLOY_*` environment variables above are set
 
 ## Standard Deployment Flow
 
@@ -51,24 +38,25 @@ ls out/   # Verify output exists: should contain index.html and other pages
 
 ### Step 2 — Deploy with expect script
 
-Run from the project root. Replace `YOUR_PASSWORD` with the vault password.
+Run from the project root. The script reads `BET_DEPLOY_*` from the environment.
 
 ```bash
 expect << 'EOF'
-set timeout 60
-spawn scp -r out/. shamanakin@pdx1-shared-a3-02.dreamhost.com:~/brighteyedtherapy.com/
+set timeout 120
+spawn scp -r out/. $env(BET_DEPLOY_USER)@$env(BET_DEPLOY_HOST):$env(BET_DEPLOY_PATH)
 expect {
-    -re ".*assword:.*" { send "***REMOVED***\r" }
-    timeout { puts "Timed out"; exit 1 }
+    -re ".*assword:.*" { send "$env(BET_DEPLOY_PASSWORD)\r" }
+    timeout { puts "Timed out waiting for password prompt"; exit 1 }
 }
 expect eof
+puts "Deploy complete"
 EOF
 ```
 
 ### Step 3 — Verify
 
 ```bash
-# Quick curl check (may return 403 from Cloudflare bot blocking — use browser if so)
+# Quick curl check (may return 403 from a CDN/bot filter — use browser if so)
 curl -I https://brighteyedtherapy.com
 
 # Or take a Playwright screenshot against the live domain
@@ -86,16 +74,16 @@ After build, deploy specific directories or files:
 # Deploy a single page (e.g., after updating the About page)
 expect << 'EOF'
 set timeout 30
-spawn scp -r out/about shamanakin@pdx1-shared-a3-02.dreamhost.com:~/brighteyedtherapy.com/
-expect -re ".*assword:.*" { send "***REMOVED***\r" }
+spawn scp -r out/about $env(BET_DEPLOY_USER)@$env(BET_DEPLOY_HOST):$env(BET_DEPLOY_PATH)
+expect -re ".*assword:.*" { send "$env(BET_DEPLOY_PASSWORD)\r" }
 expect eof
 EOF
 
-# Deploy just the root index and assets
+# Deploy just the root index
 expect << 'EOF'
 set timeout 30
-spawn scp out/index.html shamanakin@pdx1-shared-a3-02.dreamhost.com:~/brighteyedtherapy.com/
-expect -re ".*assword:.*" { send "***REMOVED***\r" }
+spawn scp out/index.html $env(BET_DEPLOY_USER)@$env(BET_DEPLOY_HOST):$env(BET_DEPLOY_PATH)
+expect -re ".*assword:.*" { send "$env(BET_DEPLOY_PASSWORD)\r" }
 expect eof
 EOF
 ```
@@ -109,9 +97,9 @@ Use for initial launch or when many files have changed:
 ```bash
 expect << 'EOF'
 set timeout 120
-spawn scp -r out/. shamanakin@pdx1-shared-a3-02.dreamhost.com:~/brighteyedtherapy.com/
+spawn scp -r out/. $env(BET_DEPLOY_USER)@$env(BET_DEPLOY_HOST):$env(BET_DEPLOY_PATH)
 expect {
-    -re ".*assword:.*" { send "***REMOVED***\r" }
+    -re ".*assword:.*" { send "$env(BET_DEPLOY_PASSWORD)\r" }
     timeout { puts "Timed out waiting for password prompt"; exit 1 }
 }
 expect eof
@@ -128,8 +116,8 @@ For server-side commands (checking files, clearing anything):
 ```bash
 expect << 'EOF'
 set timeout 30
-spawn ssh shamanakin@pdx1-shared-a3-02.dreamhost.com
-expect -re ".*assword:.*" { send "***REMOVED***\r" }
+spawn ssh $env(BET_DEPLOY_USER)@$env(BET_DEPLOY_HOST)
+expect -re ".*assword:.*" { send "$env(BET_DEPLOY_PASSWORD)\r" }
 expect "$ " { send "ls ~/brighteyedtherapy.com/\r" }
 expect "$ " { send "exit\r" }
 expect eof
@@ -142,8 +130,8 @@ EOF
 
 | Issue | Fix |
 |-------|-----|
-| `Permission denied` | Verify SSH user (`shamanakin`) and password from vault |
+| `Permission denied` | Verify `BET_DEPLOY_USER` and the password in your password manager |
 | SCP hangs at password | Use the `expect` script above — it handles the prompt |
-| Site shows old content | Hard-refresh browser (Cmd+Shift+R). If Cloudflare is in front, purge cache from Cloudflare dashboard |
+| Site shows old content | Hard-refresh browser (Cmd+Shift+R). If a CDN is in front, purge its cache |
 | `out/` directory missing | Run `npm run build` first |
-| 403 on curl probe | Likely Cloudflare bot blocking — verify with browser instead |
+| 403 on curl probe | Likely CDN/bot filtering — verify with browser instead |

@@ -1,22 +1,23 @@
 # Bright Eyed Therapy — Windows Deployment Guide
 
-Deploy the static Next.js export to DreamHost via WinSCP or PowerShell SCP.
+Deploy the static Next.js export to a shared host (e.g. DreamHost) via WinSCP or PowerShell SCP.
 
-## Server Details
+All host-specific values are read from environment variables so no credentials
+live in this file. Set them once per PowerShell session (or in your profile):
 
-| Item | Value |
-|------|-------|
-| **SSH/SCP host** | `brighteyedtherapy.com` |
-| **SSH user** | `shamanakin` |
-| **Remote site root** | `~/brighteyedtherapy.com/` |
-
-Credentials: `adminvault/vault/CREDENTIALS.md` — password: vault entry for `brighteyedtherapy.com`.
+```powershell
+$env:BET_DEPLOY_HOST = "your-host.example.com"   # SSH/SCP host
+$env:BET_DEPLOY_USER = "your-ssh-user"           # SSH user
+$env:BET_DEPLOY_PASSWORD = "••••••••"            # from your password manager
+$env:BET_DEPLOY_PATH = "~/brighteyedtherapy.com/" # remote site root
+```
 
 ## Prerequisites
 
 - PowerShell 5+ (built into Windows 10/11)
-- WinSCP installed (https://winscp.net) OR OpenSSH for Windows (available in Windows Settings → Optional Features)
+- WinSCP installed (https://winscp.net) OR OpenSSH for Windows (Windows Settings → Optional Features)
 - `npm run build` completed successfully (verify `out\` directory exists)
+- The `BET_DEPLOY_*` environment variables above are set
 
 ## Standard Deployment Flow
 
@@ -32,16 +33,15 @@ dir out\   # Verify output: should contain index.html
 
 Open WinSCP, create a new session:
 - Protocol: SFTP
-- Hostname: `brighteyedtherapy.com`
-- Username: `shamanakin`
-- Password: from vault
+- Hostname: `$env:BET_DEPLOY_HOST`
+- Username: `$env:BET_DEPLOY_USER`
+- Password: from your password manager
 
 Or use WinSCP command-line (if WinSCP is in PATH):
 
 ```powershell
-$password = "***REMOVED***"
 & "C:\Program Files (x86)\WinSCP\WinSCP.exe" /command `
-  "open sftp://shamanakin:$password@brighteyedtherapy.com/" `
+  "open sftp://$($env:BET_DEPLOY_USER):$($env:BET_DEPLOY_PASSWORD)@$($env:BET_DEPLOY_HOST)/" `
   "synchronize remote out\ /brighteyedtherapy.com/" `
   "exit"
 ```
@@ -51,11 +51,8 @@ $password = "***REMOVED***"
 If OpenSSH is installed:
 
 ```powershell
-# Set password in environment (avoids interactive prompt)
-$env:SSHPASS = "***REMOVED***"
-
-# Deploy all static output
-scp -r "out\." "shamanakin@brighteyedtherapy.com:~/brighteyedtherapy.com/"
+# Deploy all static output (you'll be prompted for the password)
+scp -r "out\." "$($env:BET_DEPLOY_USER)@$($env:BET_DEPLOY_HOST):$($env:BET_DEPLOY_PATH)"
 ```
 
 ### Step 3 — Verify
@@ -71,10 +68,10 @@ Start-Process "https://brighteyedtherapy.com"
 
 ```powershell
 # Deploy a single rebuilt page folder (e.g., About)
-scp -r "out\about" "shamanakin@brighteyedtherapy.com:~/brighteyedtherapy.com/"
+scp -r "out\about" "$($env:BET_DEPLOY_USER)@$($env:BET_DEPLOY_HOST):$($env:BET_DEPLOY_PATH)"
 
 # Deploy root index only
-scp "out\index.html" "shamanakin@brighteyedtherapy.com:~/brighteyedtherapy.com/"
+scp "out\index.html" "$($env:BET_DEPLOY_USER)@$($env:BET_DEPLOY_HOST):$($env:BET_DEPLOY_PATH)"
 ```
 
 ---
@@ -88,9 +85,9 @@ param(
     [string]$Target = "all"
 )
 
-$RemoteUser = "shamanakin"
-$RemoteHost = "brighteyedtherapy.com"
-$RemotePath = "~/brighteyedtherapy.com/"
+$RemoteUser = $env:BET_DEPLOY_USER
+$RemoteHost = $env:BET_DEPLOY_HOST
+$RemotePath = $env:BET_DEPLOY_PATH
 $LocalOut = "out"
 
 Write-Host "Building..."
@@ -113,7 +110,7 @@ if ($LASTEXITCODE -eq 0) {
 
 | Issue | Fix |
 |-------|-----|
-| `Permission denied` | Verify SSH user (`shamanakin`) and password from vault |
-| WinSCP connection refused | Confirm DreamHost SSH is enabled for the domain |
-| Site shows old content | Hard-refresh browser (Ctrl+Shift+R). If Cloudflare is in front, purge cache from Cloudflare dashboard |
+| `Permission denied` | Verify `BET_DEPLOY_USER` and the password in your password manager |
+| WinSCP connection refused | Confirm SSH is enabled for the domain in your host's panel |
+| Site shows old content | Hard-refresh browser (Ctrl+Shift+R). If a CDN is in front, purge its cache |
 | `out\` directory missing | Run `npm run build` first |
